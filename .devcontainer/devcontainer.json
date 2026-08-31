@@ -1,0 +1,35 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "TARGET": "i686-elf",
+            "PREFIX": "/opt/cross",
+            "BINUTILS_VERSION": "2.46.0",
+            "GCC_VERSION": "16.1.0"
+        }
+    },
+    // We do this because otherwise we could create files as root
+    // meaning normal users will not be able to access it.
+    "remoteUser": "vscode",
+    
+    // The following makes it so we can run gdb inside the docker container
+    // ptrace is used by gdb to debug our program
+    "runArgs": [
+        "--cap-add=SYS_PTRACE"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.makefile-tools",
+                "basdp.language-gas-x86"
+            ],
+            "settings": {
+                "C_Cpp.default.compilerPath": "/opt/cross/bin/i686-elf-gcc",
+                "C_Cpp.default.intelliSenseMode": "linux-gcc-x86",
+                "C_Cpp.default.cStandard": "gnu11"
+            }
+        }
+    },
+    "postCreateCommand": "bash .devcontainer/scripts/verify-osdev-tools.sh"
+}
