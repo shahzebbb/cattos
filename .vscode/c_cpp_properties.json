@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "cattos",
+
+            "compilerPath": "/opt/cross/bin/i686-elf-gcc",
+
+            "compilerArgs": [
+                "-ffreestanding"
+            ],
+
+            "includePath": [
+                "${workspaceFolder}/kernel/include",
+                "${workspaceFolder}/kernel/arch/i386",
+                "${workspaceFolder}/libc/include"
+            ],
+
+            "defines": [
+                "__is_libk"
+            ],
+
+            "cStandard": "gnu11",
+            "intelliSenseMode": "linux-gcc-x86"
+        }
+    ],
+    "version": 4
+}
