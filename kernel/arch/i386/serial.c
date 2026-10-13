@@ -1,9 +1,12 @@
 #include <kernel/serial.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "io_ports.h"
 
 #define PORT 0x3f8 // COM1
+
+static bool serial_ready = false;
 
 static int is_transmit_empty() {
     return inb(PORT + 5) & 0x20;
@@ -41,7 +44,8 @@ int serial_initialise() {
 
     // If serial is not faulty set it in normal operation mode
     // (not-loopback with IRQs enabled and OUT#1 and OUT#2 bits enabled)
-    outb(PORT + 4, 0x0F);        
+    outb(PORT + 4, 0x0F);
+    serial_ready = true; 
     return 0;
 }
 
@@ -59,4 +63,8 @@ void serial_write(const char* data, size_t size) {
 
 void serial_writestring(const char* data) {
     serial_write(data, strlen(data));
+}
+
+bool is_serial_ready() {
+    return serial_ready;
 }

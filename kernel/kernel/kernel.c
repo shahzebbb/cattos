@@ -2,15 +2,21 @@
 
 #include <kernel/tty.h>
 #include <kernel/serial.h>
+#include <kernel/panic.h>
 
 void kernel_main(void) {
-    if (serial_initialise() == 1)
+    if (serial_initialise() == 1) {
+        panic("Initialising serial output failed");
         return;
+    }
+        
     
     serial_writestring("Launching Kernel....\n");
 
     serial_writestring("Initialising terminal\n");
     terminal_initialise();
+
+    panic("test");
     
     printf("Hello, kernel World!\nHow are you?\n");
     for (int i=0; i < 100; i++) {

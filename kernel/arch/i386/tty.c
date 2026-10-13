@@ -6,6 +6,8 @@
 
 #include "vga.h"
 
+static bool terminal_ready = false;
+
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 static uint16_t* const VGA_MEMORY = (uint16_t*) 0xB8000;
@@ -82,6 +84,7 @@ void terminal_initialise(void) {
             terminal.buffer[index] = vga_entry(' ', terminal.color); 
         }
     }
+    terminal_ready = true;
 }
 
 /* Print the character on the terminal. */
@@ -114,4 +117,9 @@ void terminal_write(const char *data, size_t size) {
 /* Print the string starting at memory addr `data` to terminal. */
 void terminal_writestring(const char *data) {
     terminal_write(data, strlen(data));
+}
+
+/* Returns whether terminal is ready or not. */
+bool is_terminal_ready() {
+    return terminal_ready;
 }
