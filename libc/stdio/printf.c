@@ -94,10 +94,8 @@ int printf(const char* restrict format, ...) {
 
             written += len;
             format += len;
-        }
-
+        }    
+    }
     va_end(parameters);
     return written;
-
-    }
 }

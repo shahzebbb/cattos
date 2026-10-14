@@ -3,6 +3,7 @@
 #include <kernel/tty.h>
 #include <kernel/serial.h>
 #include <kernel/panic.h>
+#include <kernel/assert.h>
 
 void kernel_main(void) {
     if (serial_initialise() == 1) {
@@ -10,13 +11,10 @@ void kernel_main(void) {
         return;
     }
         
-    
     serial_writestring("Launching Kernel....\n");
 
     serial_writestring("Initialising terminal\n");
     terminal_initialise();
-
-    panic("test");
     
     printf("Hello, kernel World!\nHow are you?\n");
     for (int i=0; i < 100; i++) {
