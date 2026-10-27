@@ -4,6 +4,7 @@
 #include <kernel/serial.h>
 #include <kernel/panic.h>
 #include <kernel/assert.h>
+#include <kernel/gdt.h>
 
 void kernel_main(void) {
     if (serial_initialise() == 1) {
@@ -12,6 +13,9 @@ void kernel_main(void) {
     }
         
     serial_writestring("Launching Kernel....\n");
+
+    serial_writestring("Initialising GDT\n");
+    gdt_init();
 
     serial_writestring("Initialising terminal\n");
     terminal_initialise();
