@@ -22,7 +22,7 @@ typedef struct {
 
 static Terminal terminal;
 
-/*  ------------------- Helper functions -------------------*/ 
+/*  ------------------- Helper functions ------------------- */ 
 /* Print char `c` with the specified color and location to termianl. */
 static void terminal_putentryat(
     unsigned char uc, 
@@ -69,7 +69,7 @@ static void terminal_incrementcursor(Terminal* terminal) {
     }
 }
 
-/*  --------------------------------------------------------*/ 
+/*  -------------------------------------------------------- */ 
 
 /* Initialise terminal by replacing all characters on screen with a space
    character. */
